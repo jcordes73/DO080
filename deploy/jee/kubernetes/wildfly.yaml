@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: eap 
+  labels: 
+    name: eap
+spec: 
+  containers: 
+    - resources:
+        limits :
+          cpu: 0.5
+      image: todojee
+      name: eap 
+      ports: 
+        - containerPort: 8080 
+          name: eap 
+      env:
+        - name: MYSQL_ENV_MYSQL_DATABASE
+          value: items
+        - name: MYSQL_ENV_MYSQL_USER
+          value: user1
+        - name: MYSQL_ENV_MYSQL_PASSWORD
+          value: mypa55
