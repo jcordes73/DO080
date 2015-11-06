@@ -1,0 +1,50 @@
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.network "public_network"
+
+  ### ports allowing external access to app services inside the box:
+  # Apache Httpd
+  config.vm.network :forwarded_port, guest: 30000, host: 30000
+  # EAP and other backends
+  config.vm.network :forwarded_port, guest: 30080, host: 30080
+  # MySQL
+  config.vm.network :forwarded_port, guest: 30306, host: 30306
+
+  config.vm.define "atomic" do |atomic|
+    atomic.vm.box = "rhel-7.1.3" 
+    atomic.vm.hostname = "atomic.example.com"
+    atomic.vm.synced_folder ".", "/vagrant", disabled: true
+    if Vagrant.has_plugin?('vagrant-registration')
+      atomic.registration.subscriber_username = ENV['rh_user']
+      atomic.registration.subscriber_password = ENV['rh_pass']
+    end
+    if not ENV['pool_id'].nil?
+      atomic.vm.provision "shell" do |s|
+        s.inline = "subscription-manager attach --pool=$1"
+        s.args = "#{ENV['pool_id']}"
+      end
+    end
+    atomic.vm.provision "shell", path: "reg.sh", run: "always"
+    atomic.vm.provision "shell", path: "install.sh"
+    atomic.vm.provider "virtualbox" do |vbox|
+      vbox.name = "DO276host"
+      vbox.memory = 4096
+      vbox.cpus = 2
+      vbox.customize ["modifyvm", :id, "--vram", "32"]
+
+      # Create second disk for docker image storage
+
+      # Get disk path
+      line = `VBoxManage list systemproperties | grep "Default machine folder"`
+      vb_machine_folder = line.split(':')[1].strip()
+      second_disk = File.join(vb_machine_folder, vbox.name, 'dockerdisk.vdi')
+
+      # Create and attach disk
+      unless File.exist?(second_disk)
+        vbox.customize ['createhd', '--filename', second_disk, '--format', 'VDI', '--size', 10 * 1024]
+      end
+      vbox.customize ['storageattach', :id, '--storagectl', 'IDE Controller', '--port', 0, '--device', 1, '--type', 'hdd', '--medium', second_disk]
+    end
+  end
+end
