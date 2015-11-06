@@ -28,7 +28,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     atomic.vm.provision "shell", path: "reg.sh", run: "always"
     atomic.vm.provision "shell", path: "install.sh"
     atomic.vm.provider "virtualbox" do |vbox|
-      vbox.name = "DO276host"
+      vbox.name = "DO080host"
       vbox.memory = 4096
       vbox.cpus = 2
       vbox.customize ["modifyvm", :id, "--vram", "32"]
