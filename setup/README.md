@@ -32,6 +32,8 @@
   * docker pull mysql
 * Determine the IP address for browsing the application
   * ip addr | grep eth1
+* [FL: As the Vagrantfile configures por forward, the application can be acessed using localhost or 127.0.0.1]
+
 
 ## Environment 2 (From DO280)
 
@@ -53,6 +55,7 @@
     * git push -u origin master
   * On master copy DO080 contents to have scripts, dockerfiles and json files for demos
 
-[will OSE be able to use just a folder inside the git repo?]
+Q: will OSE be able to use just a folder inside the git repo?
+A: No, app has to be alone as S2I expects pom.xml to be in the root project folder.
 
 
