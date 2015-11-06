@@ -24,6 +24,15 @@
 * To destroy the environment
   * vagrant destroy (all work is lost and the VM deleted)
 
+### Preparation for Demos
+* Clone the repo on the VM
+  * git clone https://github.com/zgutterm/do080
+* Speed up builds
+  * docker pull rhel7.1
+  * docker pull mysql
+* Determine the IP address for browsing the application
+  * ip addr | grep eth1
+
 ## Environment 2 (From DO280)
 
 * untar DO280/installers/ose-install.tar.gz

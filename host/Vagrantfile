@@ -15,10 +15,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     atomic.vm.box = "rhel-7.1.3" 
     atomic.vm.hostname = "atomic.example.com"
     atomic.vm.synced_folder ".", "/vagrant", disabled: true
-    if Vagrant.has_plugin?('vagrant-registration')
-      atomic.registration.subscriber_username = ENV['rh_user']
-      atomic.registration.subscriber_password = ENV['rh_pass']
-    end
     if not ENV['pool_id'].nil?
       atomic.vm.provision "shell" do |s|
         s.inline = "subscription-manager attach --pool=$1"
