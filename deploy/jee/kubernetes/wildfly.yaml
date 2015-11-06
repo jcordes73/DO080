@@ -1,19 +1,19 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: eap 
+  name: wildfly 
   labels: 
-    name: eap
+    name: wildfly
 spec: 
   containers: 
     - resources:
         limits :
           cpu: 0.5
-      image: todojee
-      name: eap 
+      image: do080/todojee
+      name: wildfly 
       ports: 
         - containerPort: 8080 
-          name: eap 
+          name: wildfly 
       env:
         - name: MYSQL_ENV_MYSQL_DATABASE
           value: items
