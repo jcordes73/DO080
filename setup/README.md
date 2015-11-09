@@ -54,6 +54,9 @@
     * `git add . ; git commit -a -m "populating remote repo"`
     * `git push -u origin master`
   * Remember you'll still need the DO080 gitub repo copy on master to have scripts and json files for ch 5+ demos
+* Setup MySQL client using Software Collections
+  * sudo yum install -y mysql55
+  * source /opt/rh/mysql55/enable (can be put in a /etc/profile.d script)
 
 Q: will OSE be able to use just a folder inside the git repo?
 A: No, app has to be alone as S2I expects pom.xml to be in the root project folder.
