@@ -39,21 +39,21 @@
 
 * untar DO280/installers/ose-install.tar.gz
 * run installOSE.bash, created by tar, to install OSE and configure master and host
+* Copy the DO080 github repo to f0 and then to master and workstation vms using a usb driver or whatever means available
 * run DO080/setup/configure-nfs-server.sh to configure NFS on master and host, and to create the NFS share for the database PV
-* The todo project has to be on the classroom git server on workstaion or the ucf environment needs internet access to get it from github
-  * Copy DO080 to f0 and workstation vm using a usb driver or whatever
-  * As root, Create empty remote git repo on on workstation:
-    * mkdir /var/www/git/todo.git ; cd /var/www/git/todo.git
-    * git init --bare
-    * git update-server-info
-    * cd .. ; chown -R apache:apache todo.git
-  * As student, populate the remote git repo on workstation and replace pom.xml with one suitable for OSE S2I:
-    * cd $HOME ; git clone http://workstation.pod0.example.com/todo.git
-    * cp -rp DO080/apps/jee/* $HOME/todo ; cd $HOME/todo
-    * cp $HOME/DO080/setup/pom.xml .
-    * git add . ; git commit -a -m "populating remote repo"
-    * git push -u origin master
-  * On master copy DO080 contents to have scripts, dockerfiles and json files for demos
+* The todo project has either to be on the classroom git server on workstation or the ucf environment needs internet access to get it from github
+  * As root on workstation (password "redhat"), Create empty remote git repo on on workstation:
+    * `mkdir /var/www/git/todo.git ; cd /var/www/git/todo.git`
+    * `git init --bare`
+    * `git update-server-info`
+    * `cd .. ; chown -R apache:apache todo.git`
+  * As student on workstation (password "redhat"), populate the remote git repo on workstation and replace pom.xml with one suitable for OSE S2I:
+    * `cd $HOME ; git clone http://workstation.pod0.example.com/todo.git`
+    * `cp -rp $HOME/DO080/apps/jee/* $HOME/todo ; cd $HOME/todo`
+    * `cp $HOME/DO080/setup/pom.xml .`
+    * `git add . ; git commit -a -m "populating remote repo"`
+    * `git push -u origin master`
+  * Remember you'll still need the DO080 gitub repo copy on master to have scripts and json files for ch 5+ demos
 
 Q: will OSE be able to use just a folder inside the git repo?
 A: No, app has to be alone as S2I expects pom.xml to be in the root project folder.
