@@ -54,6 +54,12 @@
     * `git add . ; git commit -a -m "populating remote repo"`
     * `git push -u origin master`
   * Remember you'll still need the DO080 gitub repo copy on master to have scripts and json files for ch 5+ demos
+* Either the Git server on workstation needs a copy of the hexboard and sketchpod projects or the UCF env needs access to the internet.
+  * Follow the same steps as for project todo, changing folder names.
+  * Alternativelly change the URLs in Demo 3.1 to match the Github clone URLs:
+    * `https://github.com/2015-Middleware-Keynote/hexboard.git`
+    * `https://github.com/2015-Middleware-Keynote/sketchpod.git`
+  * The hexboard and sketchboard apps work on ucf (even off-line) without changes to either code or configuration.
 * Setup MySQL client using Software Collections
   * sudo yum install -y mysql55
   * source /opt/rh/mysql55/enable (can be put in a /etc/profile.d script)
