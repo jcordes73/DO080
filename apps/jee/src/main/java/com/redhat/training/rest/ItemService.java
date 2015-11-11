@@ -1,25 +1,31 @@
 package com.redhat.training.rest;
 
-import com.redhat.training.model.Item;
-import com.redhat.training.ui.PaginatedListWrapper;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Application;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import java.util.List;
+import com.redhat.training.model.Item;
+import com.redhat.training.ui.PaginatedListWrapper;
 
 @Stateless
-@ApplicationPath("/api")
 @Path("items")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class ItemService extends Application {
+public class ItemService {
 	
     @PersistenceContext
     private EntityManager entityManager;
@@ -95,4 +101,5 @@ public class ItemService extends Application {
     public void deleteItem(@PathParam("id") Long id) {
         entityManager.remove(getitem(id));
     }
+    
 }

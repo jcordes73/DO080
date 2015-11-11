@@ -154,7 +154,20 @@ app.controller('alertMessagesController', function ($scope) {
     };
 });
 
+// Create a controller that handles host information
+app.controller('hostController', function ($scope, hostService) {
+	$scope.host = hostService.get();
+});
+
 // Service that provides items operations
 app.factory('itemService', function ($resource) {
     return $resource('api/items/:id');
+});
+
+//Service that provides host operations
+app.factory('hostService', function ($resource) {
+    return $resource('api/host', null,
+    		{
+    		'get': { method:'GET' }
+    		});
 });

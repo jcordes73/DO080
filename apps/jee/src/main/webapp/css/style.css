@@ -78,3 +78,10 @@ h3 {
     margin-top: 10px;
     margin-right: 25px;
 }
+
+.footer {
+	clear: both;
+	float: left;
+	margin-top: 20 px;
+	font-size: xx-small;
+}
