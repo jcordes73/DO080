@@ -7,5 +7,6 @@ cd build
 mvn clean install
 if [ $? -eq 0 ]; then
   cd ..
+  docker rmi do080/todojee
   docker build -t do080/todojee .
 fi
