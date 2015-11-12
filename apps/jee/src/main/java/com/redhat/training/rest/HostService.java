@@ -21,7 +21,7 @@ public class HostService {
     @GET
     public Host getHostInfo() throws UnknownHostException {
     	InetAddress address = InetAddress.getLocalHost();
-    	Host host = new Host(address, address.getHostName());
+    	Host host = new Host(address.getHostAddress(), address.getHostName());
     	return host;
     }
 }

@@ -7,8 +7,8 @@ public class Host {
 	private String ip;
 	private String hostname;
 	
-	public Host(InetAddress ip, String hostname) {
-		this.ip = ip.toString();
+	public Host(String ip, String hostname) {
+		this.ip = ip;
 		this.hostname = hostname;
 	}
 
