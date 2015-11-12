@@ -23,7 +23,8 @@ This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conse
 * enter your registration user id/password for RH.com
 * after full provisioning - vagrant ssh
 * sudo su -
-* cd /home/vagrant/sync
+* cd /home/vagrant/sync/ose-install
+* tar xfz openshift-ansible.tar
 * ./installOSE.bash
 * test install - oc get pods - registry/router should be running
   * currently this errors out and I don't know why
