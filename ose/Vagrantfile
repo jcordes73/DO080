@@ -1,0 +1,36 @@
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.define "master" do |master|
+    master.vm.box = "rhel-7.1.3" 
+    master.vm.hostname = "master.example.com"
+    master.vm.synced_folder ".", "/vagrant", disabled: true
+    if not ENV['pool_id'].nil?
+      master.vm.provision "shell" do |s|
+        s.inline = "subscription-manager attach --pool=$1"
+        s.args = "#{ENV['pool_id']}"
+      end
+    end
+    master.vm.provision "shell", path: "reg.sh", run: "always"
+    master.vm.provision "shell", path: "install.sh"
+    master.vm.provider "virtualbox" do |vbox|
+      vbox.name = "DO080master"
+      vbox.memory = 4096
+      vbox.cpus = 2
+      vbox.customize ["modifyvm", :id, "--vram", "32"]
+
+      # Create second disk for docker image storage
+
+      # Get disk path
+      line = `VBoxManage list systemproperties | grep "Default machine folder"`
+      vb_machine_folder = line.split(':')[1].strip()
+      second_disk = File.join(vb_machine_folder, vbox.name, 'dockerdisk.vdi')
+
+      # Create and attach disk
+      unless File.exist?(second_disk)
+        vbox.customize ['createhd', '--filename', second_disk, '--format', 'VDI', '--size', 10 * 1024]
+      end
+      vbox.customize ['storageattach', :id, '--storagectl', 'IDE Controller', '--port', 0, '--device', 1, '--type', 'hdd', '--medium', second_disk]
+    end
+  end
+end
