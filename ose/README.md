@@ -19,12 +19,14 @@ This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conse
   * `vagrant-registration-0.0.8.gem`
 
 ## How to install
+* cd /home/vagrant/sync/ose/ose-install
+* tar xfz openshift-ansible.tgz
+* cd ..
 * vagrant up --provider virtualbox
-* enter your registration user id/password for RH.com
+* enter your registration user id/password for access.redhat.com 
 * after full provisioning - vagrant ssh
 * sudo su -
-* cd /home/vagrant/sync/ose-install
-* tar xfz openshift-ansible.tar
+* cd /home/vagrant/sync/ose/ose-install
 * ./installOSE.bash
 * test install - oc get pods - registry/router should be running
   * currently this errors out and I don't know why

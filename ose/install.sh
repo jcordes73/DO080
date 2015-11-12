@@ -55,4 +55,3 @@ systemctl start nfs-server
 
 # Install OSE
 echo "Run ose-install/installOSE.bash"
-#echo "Run NFS configuration script" - this doesn't run correctly
