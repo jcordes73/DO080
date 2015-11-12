@@ -18,3 +18,12 @@ This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conse
   * `vagrant-atomic-0.0.3.gem`
   * `vagrant-registration-0.0.8.gem`
 
+## How to install
+* vagrant up --provider virtualbox
+* enter your registration user id/password for RH.com
+* after full provisioning - vagrant ssh
+* sudo su -
+* cd /home/vagrant/sync
+* ./installOSE.bash
+* test install - oc get pods - registry/router should be running
+  * currently this errors out and I don't know why
