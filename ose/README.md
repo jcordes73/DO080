@@ -25,7 +25,7 @@ This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conse
   * vagrant plugin install vagrant-registration
 
 ## How to install
-* cd /home/vagrant/sync/ose/ose-install
+* cd do080/ose/ose-install
 * tar xfz openshift-ansible.tgz
 * cd ..
 * vagrant up --provider virtualbox
