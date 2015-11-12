@@ -5,9 +5,9 @@ This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conse
 
 ## Tested under Mac OS X El Capitan
 
-* VirtualBox 5.0.0 r101573
+* VirtualBox 5.0.10 
 * Vagrant 1.7.4
-* vagrant-registration plugin 0.0.19
+* vagrant-registration plugin 1.0.0 
 
 ## Tested under RHEL7 using:
 
@@ -17,6 +17,12 @@ This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conse
 * CDK 1.0
   * `vagrant-atomic-0.0.3.gem`
   * `vagrant-registration-0.0.8.gem`
+
+## Pre-requisites
+* Install VirtualBox 5.x (http://virtualbox.org)
+* Install Vagrant 1.7.x (http://vagrantup.com)
+* Install vagrant-registration plugin
+  * vagrant plugin install vagrant-registration
 
 ## How to install
 * cd /home/vagrant/sync/ose/ose-install
