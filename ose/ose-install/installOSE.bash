@@ -5,7 +5,7 @@ ROOT_PASSWORD=redhat
 LOG=/var/log/OSEInstall.log
 
 # Change root password to known password
-echo redhat | passwd --stdin
+echo redhat | passwd --stdin root
 
 #DO NOT CHANGE THE FOLLOWING VARIABLES (EXCEPT HOST_STATION)
 HOST_MASTER=`hostname`
