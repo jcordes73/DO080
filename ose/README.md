@@ -32,7 +32,7 @@ This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conse
 * enter your registration user id/password for access.redhat.com 
 * after full provisioning - vagrant ssh
 * sudo su -
-* cd /home/vagrant/sync/ose/ose-install
+* cd /home/vagrant/sync/ose-install
 * ./installOSE.bash
 * test install - oc get pods - registry/router should be running
   * currently this errors out and I don't know why
