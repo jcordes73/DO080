@@ -124,9 +124,15 @@ systemctl start rpcbind
 systemctl enable nfs-server
 systemctl start nfs-server
 
+mkdir -p /var/export/registryvol
+mkdir -p /var/export/dbvol
+chown nfsnobody:nfsnobody /var/export/registryvol
+chown nfsnobody:nfsnobody /var/export/dbvol
+chmod 700 /var/export/registryvol
+chmod 700 /var/export/dbvol
+echo "/var/export/registryvol *(rw,async,all_squash)" >> /etc/exports
+echo "/var/export/dbvol *(rw,async,all_squash)" >> /etc/exports
 exportfs -a
-
-sed -i "s/master.podX.example.com/$HOST_MASTER/g" registry-volume.json
 
 oc project default
 
