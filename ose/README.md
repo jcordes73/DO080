@@ -64,4 +64,7 @@ This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conse
 * cd /home/vagrant
 * ./installOSE-post.bash
 * oc get pods until the registry and router come online
-
+* vi /etc/openshift/master/master-config.yaml
+  * find oauth section
+  * change DenyAllPasswordIdentityProvider to HTPasswdPasswordIdentityProvider
+  * add a line underneath 'file: /etc/openshift/openshift-passwd'
