@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ip=$(ip addr show eth0 | grep -Po 'inet \K[\d.]+')
+ip=$(ip addr show eth1 | grep -Po 'inet \K[\d.]+')
 echo "Using IP: ${ip}"
 
 yum -y update
@@ -48,10 +48,10 @@ systemctl enable nfs-server
 systemctl start nfs-server
 
 # Setup for OpenShift Enterprise 3 
-#systemctl disable firewalld
-#systemctl stop firewalld
-#systemctl disable NetworkManager
-#systemctl stop NetworkManager
+systemctl disable firewalld
+systemctl stop firewalld
+systemctl disable NetworkManager
+systemctl stop NetworkManager
 
 # Install OSE
-echo "Run ose-install/installOSE.bash"
+echo "Run the installOSE-pre.bash, OSE installer, and installOSE-post.bash scripts as root" 
