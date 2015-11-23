@@ -44,16 +44,17 @@ This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conse
     * sudo mkdir -p /usr/local/opt/bind/sbin/
     * sudo ln -s /usr/local/Cellar/bind/9.10.2/sbin/named /usr/local/opt/bind/sbin
     * vi /usr/local/etc/named.conf:
-        options {
-            directory "/usr/local/var/named";
-            forwarders {
-                127.0.0.1 port 10053;
-            };
+
+             options {
+                 directory "/usr/local/var/named";
+                 forwarders {
+                     127.0.0.1 port 10053;
+                 };
         
-            max-cache-ttl 0;
-            max-ncache-ttl 0;
-            // query-source address * port 53;
-        };
+                 max-cache-ttl 0;
+                 max-ncache-ttl 0;
+                 // query-source address * port 53;
+             };
 
     * sudo launchctl load homebrew.mxcl.bind.plist
 
