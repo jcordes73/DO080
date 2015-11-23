@@ -58,20 +58,10 @@ This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conse
       
       This is necessary so that the containers can see the DNS entry that landrush is maintaining for the master host
 
-    * sudo launchctl load homebrew.mxcl.bind.plist
-
-## How to install (OBSOLETE -- IGNORE)
-* cd do080/ose/ose-install
-* tar xfz openshift-ansible.tgz
-* cd ..
-* vagrant up --provider virtualbox
-* enter your registration user id/password for access.redhat.com 
-* after full provisioning - vagrant ssh
-* sudo su -
-* cd /home/vagrant/sync/ose-install
-* ./installOSE.bash
-* test install - oc get pods - registry/router should be running
-  * currently this errors out and I don't know why
+    * sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.bind.plist
+    * test: dig ose3-master.example.com
+    * ideally test accessing master in a container running on ose3-master:
+      * curl -k https://ose3-master.example.com:8443/
 
 ## How to install using OSE Vagrant box
 * Fix your subscription pool id in env.sh (create one from template)
