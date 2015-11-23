@@ -8,6 +8,8 @@ This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conse
 * VirtualBox 5.0.10 
 * Vagrant 1.7.4
 * vagrant-registration plugin 1.0.0 
+* landrush (vagrant plugin) 0.18.0
+* vagrant-hostmanager plugin 1.6.1
 
 ## Tested under RHEL7 using:
 
@@ -25,6 +27,8 @@ This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conse
   * vagrant plugin install vagrant-registration
 * Install vagrant-hostmanager plugin
   * vagrant plugin install vagrant-hostmanager
+* Install landrush plugin
+  * vagrant plugin install landrush 
 * Add RHEL-7.1.3 vagrant box to your machine
   * download from https://access.redhat.com/downloads/content/293/ver=1/rhel---7/1.0.1/x86_64/product-downloads 
   * vagrant box add --name rhel-7.1.3 ~/Downloads/rhel-server-virtualbox-7.1.3.x86_64.box
@@ -32,6 +36,26 @@ This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conse
   * For Mac OS X
     * sudo easy_install pip
     * sudo pip install ansible
+* Install BIND or otherwise configure DNS
+  * On Mac:
+    * brew install bind (not as root)
+    * cd /usr/local/Cellar/bind/9.10.2/
+    * sudo cp *plist /Library/LaunchDaemons
+    * sudo mkdir -p /usr/local/opt/bind/sbin/
+    * sudo ln -s /usr/local/Cellar/bind/9.10.2/sbin/named /usr/local/opt/bind/sbin
+    * vi /usr/local/etc/named.conf:
+        options {
+            directory "/usr/local/var/named";
+            forwarders {
+                127.0.0.1 port 10053;
+            };
+        
+            max-cache-ttl 0;
+            max-ncache-ttl 0;
+            // query-source address * port 53;
+        };
+
+    * sudo launchctl load homebrew.mxcl.bind.plist
 
 ## How to install (OBSOLETE -- IGNORE)
 * cd do080/ose/ose-install
@@ -58,7 +82,7 @@ This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conse
 * vagrant up --no-provision --provider virtualbox
 * vagrant provision (this takes a LOOOOOONNNNNGGGGG time) 
 * cd do080/ose/ose-install
-* scp firewall-cmd.txt xxx installOSE-post.bash vagrant@ose3-master.example.com
+* scp firewall-cmd.txt firewall-sysconfig.txt installOSE-post.bash vagrant@ose3-master.example.com
 * vagrant ssh
 * sudo su -
 * cd /home/vagrant

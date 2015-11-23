@@ -68,4 +68,5 @@
 Q: will OSE be able to use just a folder inside the git repo?
 A: No, app has to be alone as S2I expects pom.xml to be in the root project folder.
 
-
+## Alternative Environment 2 (Using Vagrant)
+* See ose/README.md
