@@ -85,6 +85,13 @@ This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conse
   * find oauth section
   * change DenyAllPasswordIdentityProvider to HTPasswdPasswordIdentityProvider
   * add a line underneath 'file: /etc/openshift/openshift-passwd'
-* Change the domain name to cloudapps.example.com (where???)
+* vi /etc/openshift/node/node-config.yaml
+  * change dnsDomain from cluster.local to cloudapps.example.com 
+* Restart the openshift-master and openshift-node services
+* Test the OSE installation through the creation of an app
+  * [as vagrant] oc login -u student -p redhat
+  * oc new-project test
+  * oc new-app openshift/hello-openshift
+  * after the pod is ready:  curl service-ip-addr:8080 - it should say "Hello OpenShift!"
 
 After the original provision of the ose3-master host, and doing a vagrant up, vagrant seems to get confused about which ethX NIC is the one that should be the static IP and changes ETH0.  This causes the vagrant startup cycle to freeze.  You must manually edit the ifcfg-eth0 script using virtualbox and opening a console.  Also, restart the networkmanager.
