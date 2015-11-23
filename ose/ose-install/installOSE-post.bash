@@ -65,4 +65,4 @@ oadm registry --service-account=registry \
 
 oc volume deploymentconfigs/docker-registry \
    --add --overwrite --name=registry-storage --mount-path=/registry \
-   --source='{"nfs": { "server": "master.example.com", "path": "/var/export/registryvol"}}'
+   --source='{"nfs": { "server": "ose3-master.example.com", "path": "/var/export/registryvol"}}'

@@ -11,9 +11,12 @@
 * Setup environment script
   * Go to the DO080/host directory
   * Create an env.sh from env.sh.template
-  * Customize the parameters based on your RH portal ID and employee subscription pool ID (subscription-manager list --available)
+  * Customize the parameters based on your employee subscription pool ID (subscription-manager list --available)
   * Source the script: . env.sh
   * Don't check this file in - there is a .gitignore entry for this file name
+* Add RHEL-7.1.3 vagrant box to your machine
+  * download from https://access.redhat.com/downloads/content/293/ver=1/rhel---7/1.0.1/x86_64/product-downloads
+  * vagrant box add --name rhel-7.1.3 ~/Downloads/rhel-server-virtualbox-7.1.3.x86_64.box
 * Provision virtual environment 
   * vagrant up --provider virtualbox
   * this will take as long as 15-20 minutes for the initial provisioning
@@ -33,6 +36,7 @@
 * Determine the IP address for browsing the application
   * ip addr | grep eth1
 * [FL: As the Vagrantfile configures por forward, the application can be acessed using localhost or 127.0.0.1]
+* Install MySQL client on the host machine
 
 
 ## Environment 2 (From DO280)

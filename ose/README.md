@@ -43,7 +43,7 @@ This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conse
     * sudo cp *plist /Library/LaunchDaemons
     * sudo mkdir -p /usr/local/opt/bind/sbin/
     * sudo ln -s /usr/local/Cellar/bind/9.10.2/sbin/named /usr/local/opt/bind/sbin
-    * forward local DNS to landrush: vi /usr/local/etc/named.conf:
+    * forward local DNS to landrush: sudo vi /usr/local/etc/named.conf:
 
              options {
                  directory "/usr/local/var/named";
@@ -59,7 +59,7 @@ This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conse
       This is necessary so that the containers can see the DNS entry that landrush is maintaining for the master host
 
     * sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.bind.plist
-    * test: dig ose3-master.example.com
+    * test: dig ose3-master.example.com (cannot test until vagrant machine is up)
     * ideally test accessing master in a container running on ose3-master:
       * curl -k https://ose3-master.example.com:8443/
 
@@ -74,10 +74,10 @@ This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conse
 * cp do080/ose/Vagrantfile.ansible Vagrantfile
 * vagrant up --no-provision --provider virtualbox
 * vagrant provision (this takes a LOOOOOONNNNNGGGGG time) 
-* cd do080/ose/ose-install
-* scp firewall-cmd.txt firewall-sysconfig.txt installOSE-post.bash vagrant@ose3-master.example.com
+* scp ../../firewall-cmd.txt ../../firewall-sysconfig.txt ../../installOSE-post.bash vagrant@ose3-master.example.com:~
 * vagrant ssh
 * sudo su -
+* Change the /etc/resolv.conf to point to the host (underlying the VM) for the nameserver (the bind that was installed, e.g. on the Mac with brew)
 * cd /home/vagrant
 * ./installOSE-post.bash
 * oc get pods until the registry and router come online
@@ -86,6 +86,5 @@ This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conse
   * change DenyAllPasswordIdentityProvider to HTPasswdPasswordIdentityProvider
   * add a line underneath 'file: /etc/openshift/openshift-passwd'
 * Change the domain name to cloudapps.example.com (where???)
-* Change the /etc/resolv.conf to point to the host (underlying the VMS) for the nameserver (the bind that was installed, e.g. on the Mac with brew)
 
 After the original provision of the ose3-master host, and doing a vagrant up, vagrant seems to get confused about which ethX NIC is the one that should be the static IP and changes ETH0.  This causes the vagrant startup cycle to freeze.  You must manually edit the ifcfg-eth0 script using virtualbox and opening a console.  Also, restart the networkmanager.
