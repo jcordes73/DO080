@@ -43,7 +43,7 @@ This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conse
     * sudo cp *plist /Library/LaunchDaemons
     * sudo mkdir -p /usr/local/opt/bind/sbin/
     * sudo ln -s /usr/local/Cellar/bind/9.10.2/sbin/named /usr/local/opt/bind/sbin
-    * vi /usr/local/etc/named.conf:
+    * forward local DNS to landrush: vi /usr/local/etc/named.conf:
 
              options {
                  directory "/usr/local/var/named";
@@ -55,6 +55,8 @@ This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conse
                  max-ncache-ttl 0;
                  // query-source address * port 53;
              };
+      
+      This is necessary so that the containers can see the DNS entry that landrush is maintaining for the master host
 
     * sudo launchctl load homebrew.mxcl.bind.plist
 
