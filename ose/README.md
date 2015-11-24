@@ -95,3 +95,6 @@ This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conse
   * after the pod is ready:  curl service-ip-addr:8080 - it should say "Hello OpenShift!"
 
 After the original provision of the ose3-master host, and doing a vagrant up, vagrant seems to get confused about which ethX NIC is the one that should be the static IP and changes ETH0.  This causes the vagrant startup cycle to freeze.  You must manually edit the ifcfg-eth0 script using virtualbox and opening a console.  Also, restart the networkmanager.
+
+* Clone the DO080 repository in the vagrant home directory
+  * git clone https://github.com/zgutterm/do080
