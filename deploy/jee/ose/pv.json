@@ -14,7 +14,7 @@
         "accessModes": [ "ReadWriteOnce" ],
         "nfs": {
             "path": "/var/export/dbvol",
-            "server": "master.pod0.example.com"
+            "server": "ose3-master.example.com"
         }
     } 
 }
