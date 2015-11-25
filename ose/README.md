@@ -112,3 +112,5 @@ After the original provision of the ose3-master host, and doing a vagrant up, va
 
 * Clone the DO080 repository in the vagrant home directory
   * git clone https://github.com/zgutterm/do080
+* Install MariaDB (MySQL) for the mysql client command
+  * sudo yum -y install mariadb
