@@ -85,8 +85,9 @@ This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conse
   * find oauth section
   * change DenyAllPasswordIdentityProvider to HTPasswdPasswordIdentityProvider
   * add a line underneath 'file: /etc/openshift/openshift-passwd'
-* vi /etc/openshift/node/node-config.yaml
-  * change dnsDomain from cluster.local to cloudapps.example.com 
+* vi /etc/openshift/master/master-config.yaml and add, under routingConfig:
+  routingConfig:
+    subdomain: cloudappsX.example.com
 * Restart the openshift-master and openshift-node services
 * Test the OSE installation through the creation of an app
   * [as vagrant] oc login -u student -p redhat
