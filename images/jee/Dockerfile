@@ -1,4 +1,4 @@
-FROM	rhel7.1
+FROM	rhel7.2
 MAINTAINER Jim Rigsbee <jrigsbee@redhat.com>
 
 # Install packages necessary to run EAP
