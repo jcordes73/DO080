@@ -3,35 +3,13 @@
 
 This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conserve memory only master is used as node). 
 
-## Tested under Mac OS X El Capitan
-
-* VirtualBox 5.0.10 
-* Vagrant 1.7.4
-* vagrant-registration plugin 1.0.0 
-* landrush (vagrant plugin) 0.18.0
-* vagrant-hostmanager plugin 1.6.1
-
-## Tested under RHEL7 using:
-
-* `VirtualBox-5.0-5.0.8_103449_el7-1.x86_64`
-* `vagrant-1.7.4-1.x86_64`
-* `rhel-server-libvirt-7.1-3.x86_64.box`
-* CDK 1.0
-  * `vagrant-atomic-0.0.3.gem`
-  * `vagrant-registration-0.0.8.gem`
-
 ## Pre-requisites
-* Install VirtualBox 5.x (http://virtualbox.org)
-* Install Vagrant 1.7.x (http://vagrantup.com)
-* Install vagrant-registration plugin
-  * vagrant plugin install vagrant-registration
+These instructions assume you have created the Part 1 environment with Vagrant.
+
 * Install vagrant-hostmanager plugin
   * vagrant plugin install vagrant-hostmanager
 * Install landrush plugin
   * vagrant plugin install landrush 
-* Add RHEL-7.1.3 vagrant box to your machine
-  * download from https://access.redhat.com/downloads/content/293/ver=1/rhel---7/1.0.1/x86_64/product-downloads 
-  * vagrant box add --name rhel-7.1.3 ~/Downloads/rhel-server-virtualbox-7.1.3.x86_64.box
 * Install ansible for your platform
   * For Mac OS X
     * sudo easy_install pip
@@ -63,15 +41,12 @@ This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conse
     * ideally test accessing master in a container running on ose3-master:
       * curl -k https://ose3-master.example.com:8443/
 
-## How to install using OSE Vagrant box
-* Fix your subscription pool id in env.sh (create one from template)
-* . env.sh
+## How to build an OpenShift Enterprise master server with Vagrant 
 * cd do080/ose/ose-install
 * tar xzf oo-install-ose.tgz
 * tar xzf oo-install-ose-YYMMDD-####.tgz
 * cd oo-install-ose-YYMMDD-####
 * cd openshift-ansible-$version
-* cp do080/ose/Vagrantfile.ansible Vagrantfile
 * vagrant up --no-provision --provider virtualbox
 * vagrant provision (this takes a LOOOOOONNNNNGGGGG time) 
 * scp ../../firewall-cmd.txt ../../firewall-sysconfig.txt ../../installOSE-post.bash vagrant@ose3-master.example.com:~

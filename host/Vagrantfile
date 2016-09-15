@@ -15,12 +15,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     atomic.vm.box = "rhel-7.1.3" 
     atomic.vm.hostname = "atomic.example.com"
     atomic.vm.synced_folder ".", "/vagrant", disabled: true
-    if not ENV['pool_id'].nil?
-      atomic.vm.provision "shell" do |s|
-        s.inline = "subscription-manager attach --pool=$1"
-        s.args = "#{ENV['pool_id']}"
-      end
-    end
     atomic.vm.provision "shell", path: "reg.sh", run: "always"
     atomic.vm.provision "shell", path: "install.sh"
     atomic.vm.provider "virtualbox" do |vbox|
