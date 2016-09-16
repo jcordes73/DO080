@@ -40,9 +40,10 @@ cat <<'EOF' > /etc/sysconfig/docker-storage-setup
 VG=docker-vg
 SETUP_LVM_THIN_POOL=yes
 EOF
+systemctl stop docker
+rm -fr /var/lib/docker
 docker-storage-setup
 lvextend docker-vg/docker-pool /dev/sdb1
-systemctl stop docker
 systemctl start docker
 systemctl enable docker
 

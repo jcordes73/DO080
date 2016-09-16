@@ -11,13 +11,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # MySQL
   config.vm.network :forwarded_port, guest: 30306, host: 30306
 
-  config.vm.define "atomic" do |atomic|
-    atomic.vm.box = "rhel-7.1.3" 
-    atomic.vm.hostname = "atomic.example.com"
-    atomic.vm.synced_folder ".", "/vagrant", disabled: true
-    atomic.vm.provision "shell", path: "reg.sh", run: "always"
-    atomic.vm.provision "shell", path: "install.sh"
-    atomic.vm.provider "virtualbox" do |vbox|
+  config.vm.define "do080host" do |do080host|
+    do080host.vm.box = "rhel-7.2" 
+    do080host.vm.hostname = "do080host.example.com"
+    do080host.vm.synced_folder ".", "/vagrant", disabled: false
+    do080host.vm.provision "shell", path: "reg.sh", run: "always"
+    do080host.vm.provision "shell", path: "install.sh"
+    do080host.vm.provider "virtualbox" do |vbox|
       vbox.name = "DO080host"
       vbox.memory = 4096
       vbox.cpus = 2
