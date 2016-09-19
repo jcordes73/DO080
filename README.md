@@ -12,3 +12,15 @@
 * ose: Vagrant built environment to deploy apps using OpenShift Enterprise
 * setup: instructions to setup Docker and OSE Vagrant machines
 
+## Change History
+
+* September 2016
+  * Moved to CDK 2.1 - RHEL 7.2-25 vagrant box
+  * Upgraded to Vagrant 1.8.4, VirtualBox 5.0.26
+  * Upgraded vagrant-registration plugin to 1.2.1
+  * Upgraded vagrant-hostmanager plugin to 1.8.1
+  * Renamed part 1 VM to do080host (from atomic)
+  * Removed setup folder and moved contents to better folders
+  * Changed host/install.sh for proper pool storage construction
+  * Provided scripts and instructions for distribution of VM as a lab environment
+

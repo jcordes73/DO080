@@ -41,3 +41,15 @@ This lab environment supports applications deployed using Docker/Kubernetes. Thi
 * Determine the IP address for browsing the application
   * ip addr | grep eth1 (As the Vagrantfile configures port forwarding, the application can be acessed using localhost or 127.0.0.1)
 * Install MySQL client on the host machine
+
+## Finalizing the vagrant box for public use as a non-vagrant environment
+
+* Establish the student account
+  * Execute: sh /vagrant/seal.sh
+  * Verify no errors occurred
+* Shutdown the VM from within the VM (don't use vagrant) 
+  * Execute: sudo shutdown -h now
+* Zip the VirtualBox VM directory for do080host
+  * Recommend using 7zip and separate into 1G files
+* Publish files
+  * Publish the archive and the PUBLIC-README.md file

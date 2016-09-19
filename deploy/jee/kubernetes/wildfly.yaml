@@ -10,6 +10,7 @@ spec:
         limits :
           cpu: 0.5
       image: do080/todojee
+      imagePullPolicy: IfNotPresent
       name: wildfly 
       ports: 
         - containerPort: 8080 
