@@ -1,15 +1,11 @@
 
-# Host environment for DO080
+# Host environment for DO080 Part 2
 
 This Vagrant Box has the minimal setup to build a one-node OSE cluster (to conserve memory only master is used as node). 
 
 ## Pre-requisites
-These instructions assume you have created the Part 1 environment with Vagrant.
+These instructions assume you have created the Part 1 environment with Vagrant. See do080/host/README.md.
 
-* Install vagrant-hostmanager plugin
-  * vagrant plugin install vagrant-hostmanager
-* Install landrush plugin
-  * vagrant plugin install landrush 
 * Install ansible for your platform
   * For Mac OS X
     * sudo easy_install pip
@@ -21,20 +17,8 @@ These instructions assume you have created the Part 1 environment with Vagrant.
     * sudo cp *plist /Library/LaunchDaemons
     * sudo mkdir -p /usr/local/opt/bind/sbin/
     * sudo ln -s /usr/local/Cellar/bind/9.10.2/sbin/named /usr/local/opt/bind/sbin
-    * forward local DNS to landrush: sudo vi /usr/local/etc/named.conf:
-
-             options {
-                 directory "/usr/local/var/named";
-                 forwarders {
-                     127.0.0.1 port 10053;
-                 };
-        
-                 max-cache-ttl 0;
-                 max-ncache-ttl 0;
-                 // query-source address * port 53;
-             };
-      
-      This is necessary so that the containers can see the DNS entry that landrush is maintaining for the master host
+    * determine IP addr of eth1 on the virtual machine
+    * FIX ME!!! - instructions for creating wildcard DNS entry to OSE master 
 
     * sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.bind.plist
     * test: dig ose3-master.example.com (cannot test until vagrant machine is up)
@@ -42,19 +26,14 @@ These instructions assume you have created the Part 1 environment with Vagrant.
       * curl -k https://ose3-master.example.com:8443/
 
 ## How to build an OpenShift Enterprise master server with Vagrant 
-* cd do080/ose/ose-install
-* tar xzf oo-install-ose.tgz
-* tar xzf oo-install-ose-YYMMDD-####.tgz
-* cd oo-install-ose-YYMMDD-####
-* cd openshift-ansible-$version
 * vagrant up --no-provision --provider virtualbox
 * vagrant provision (this takes a LOOOOOONNNNNGGGGG time) 
-* scp ../../firewall-cmd.txt ../../firewall-sysconfig.txt ../../installOSE-post.bash vagrant@ose3-master.example.com:~
+* scp ../../firewall-cmd.txt ../../firewall-sysconfig.txt ../../install-post.sh vagrant@ose3-master.example.com:~
 * vagrant ssh
 * sudo su -
 * Change the /etc/resolv.conf to point to the host (underlying the VM) for the nameserver (the bind that was installed, e.g. on the Mac with brew)
 * cd /home/vagrant
-* ./installOSE-post.bash
+* ./install-post.sh
 * oc get pods until the registry and router come online
 * vi /etc/openshift/master/master-config.yaml
   * find oauth section
@@ -86,7 +65,5 @@ After the original provision of the ose3-master host, and doing a vagrant up, va
   * lvextend /dev/VolGroup00/LogVol00 -l +100%FREE
   * resize2fs /dev/VolGroup00/LogVol00
 
-* Clone the DO080 repository in the vagrant home directory
+* Clone the DO080 repository in the student home directory
   * git clone https://github.com/zgutterm/do080
-* Install MariaDB (MySQL) for the mysql client command
-  * sudo yum -y install mariadb

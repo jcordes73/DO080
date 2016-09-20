@@ -1,0 +1,30 @@
+ansible_callback_facts_yaml: /root/.config/openshift/.ansible/callback_facts.yaml
+ansible_config: /usr/share/atomic-openshift-utils/ansible.cfg
+ansible_inventory_path: /hosts
+ansible_log_path: /tmp/ansible.log
+deployment:
+  ansible_ssh_user: root
+  hosts:
+  - connect_to: ose3-master.example.com
+    hostname: ose3-master.example.com
+    ip: 192.168.1.100
+    node_labels: '{''region'': ''infra''}'
+    public_hostname: ose3-master.example.com
+    public_ip: 192.168.1.100
+    roles:
+    - master
+    - etcd
+    - node
+    - storage
+  master_routingconfig_subdomain: 'ose.example.com'
+  proxy_exclude_hosts: ''
+  proxy_http: ''
+  proxy_https: ''
+  roles:
+    etcd: {}
+    master: {}
+    node: {}
+    storage: {}
+variant: openshift-enterprise
+variant_version: '3.2'
+version: v2
