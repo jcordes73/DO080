@@ -1,0 +1,17 @@
+;
+; /var/named/db.192.168.1 - Zone file for 192.168.1 network
+;
+$TTL 86400  ; 1 day
+1.168.192.in-addr.arpa  IN  SOA ns.example.com. root.example.com. (
+                            2003040101      ; Serial
+                            10800           ; Refresh after 3 hours
+                            3600            ; Retry after 1 hour
+                            604800          ; Expire after 1 week
+                            86400 )         ; Minimum TTL of 1 day
+
+; name servers
+1.168.192.in-addr.arpa IN NS ns1.example.com.
+
+; address to host mappings
+100                       IN  PTR ose3-master.example.com.
+50			  IN  PTR ns1.example.com.
