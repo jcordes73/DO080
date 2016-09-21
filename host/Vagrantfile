@@ -10,6 +10,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, guest: 30080, host: 30080
   # MySQL
   config.vm.network :forwarded_port, guest: 30306, host: 30306
+  # OpenShift
+  config.vm.network :forwarded_port, guest: 8443, host: 8443
 
   config.vm.define "do080host" do |do080host|
     do080host.vm.box = "rhel-7.2" 
@@ -19,7 +21,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     do080host.vm.provision "shell", path: "install.sh"
     do080host.vm.provider "virtualbox" do |vbox|
       vbox.name = "DO080host"
-      vbox.memory = 4096
+      vbox.memory = 8192
       vbox.cpus = 2
       vbox.customize ["modifyvm", :id, "--vram", "32"]
     end

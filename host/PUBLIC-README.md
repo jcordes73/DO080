@@ -24,3 +24,6 @@ This lab environment supports applications deployed using Docker/Kubernetes. Thi
   * ip addr | grep eth1 
   * this allows ssh access in the future instead of the console
 * Install MySQL client on the host machine (if desired)
+
+###Info
+* The OpenShift console can be reached on the host at https://localhost:8443 because of port forwarding by Vagrant
